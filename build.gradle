@@ -9,13 +9,10 @@ plugins {
 
 ext {
 
-	set('springdoc', "2.0.2")
-	set('lombok', "1.18.22")
-	set('mapstruct', "1.5.3.Final")
-	set('lombokMapstructBindingVersion', "0.2.0")
 	set('junit', "4.13.1")
-	set('webjars', "5.18.2")
+
 }
+
 group = 'br.com.foursales'
 version = '0.0.1-SNAPSHOT'
 
@@ -36,12 +33,22 @@ dependencies {
 
 	// Autenticação JWT
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // Usa Jackson para parsing de JWT
-	// Certifique-se de que esta versão está disponível no Maven Central
+
+	//swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+	//mapper
+	implementation("org.mapstruct:mapstruct:1.5.5.Final")
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+
+	// Para Spring Boot usar o MapStruct com ComponentModel Spring:
+	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
 	// Feign Client para comunicação entre serviços
-	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.0") // Especifique a versão
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.0")
 
 	// Banco de Dados (MySQL)
 	runtimeOnly("com.mysql:mysql-connector-j")
