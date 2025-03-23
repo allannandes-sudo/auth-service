@@ -9,7 +9,7 @@ import org.mapstruct.Named;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,9 +23,12 @@ public interface UserMapper {
     CustomUserDetails toUserDetails(UserEntity userEntity);
 
     @Named("mapRolesToAuthorities")
-    default Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<String> roles) {
+    default List<GrantedAuthority> mapRolesToAuthorities(Set<String> roles) {
+        if (roles == null) {
+            return List.of(); // Retorna lista vazia se roles for nulo
+        }
         return roles.stream()
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

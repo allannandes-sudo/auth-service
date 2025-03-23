@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
-import java.util.Collection;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -19,7 +19,7 @@ public class CustomUserDetails implements UserDetails {
 
     private final String username;
     private final String password;
-    private final Collection<? extends GrantedAuthority> authorities;
+    private final List<GrantedAuthority> authorities;
 
 
     @Override
