@@ -42,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
         String rolesString = String.join(",", user.getRoles());
 
         // Gerar token JWT com username e roles
-        String token = jwtTokenProvider.generateToken(user.getUsername(), rolesString);
+        String token = jwtTokenProvider.generateToken(user, rolesString);
 
         return new AuthResponseDTO(token);
     }

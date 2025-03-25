@@ -1,5 +1,6 @@
 package br.com.foursales.auth_service.infrastructure.security;
 
+import br.com.foursales.auth_service.domain.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -34,12 +35,13 @@ public class JwtTokenProvider {
     }
 
     // 🔐 Gera um token JWT com usuário e roles
-    public String generateToken(String username, String roles) {
+    public String generateToken(User user, String roles) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expirationTime);
 
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(user.getUsername())
+                .claim("userId", user.getId())
                 .claim("roles", roles)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
